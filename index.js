@@ -12,13 +12,14 @@ const config = {
     ssl: false
 }
 var connection = mysql.createConnection(config);
+/*
 connection.connect(function(erro){
     if(erro){
         console.log('Erro no my sql: '+erro);
     }
     else{
         console.log('mysql ok');
-       /*
+       
         connection.query("INSERT INTO leaderboard (Name,Score) VALUES('player2','18')",function(err,results,field){
             if (err) {
                 console.log('Erro insert: '+erro);
@@ -26,8 +27,8 @@ connection.connect(function(erro){
                 console.log('id do insert: '+results.insertId);
             }
         });
-        */
-       /*
+        
+       
        connection.query("UPDATE leaderboard SET Score ='2' WHERE ID =2",function(err,results,field){
         if (err) {
             console.log('Erro update: '+erro);
@@ -36,7 +37,7 @@ connection.connect(function(erro){
             console.log('dados alterados: '+results.changedRows);
         }
         
-       });*/
+       });
 
         connection.query('SELECT * FROM leaderboard',function(err,results,field){
             if (err) {
@@ -50,6 +51,7 @@ connection.connect(function(erro){
     }
 }
 );
+*/
 app.listen(port,function(){
     console.log('Servidor escutando na porta: ' + port)
 })
@@ -58,6 +60,39 @@ app.get('/login',function(req,res){
     var msg_res ={};
     msg_res.status_code = 200;
     msg_res.msg_text = "";
+
+    connection.connect(function(erro){
+        if(erro){
+            console.log('Erro no my sql: '+erro);
+        }
+        else{
+            console.log('mysql ok'); 
+            connection.query('SELECT * FROM leaderboard',function(err,results,field){
+                if (err) {
+                    console.log('Erro sql: '+erro);
+                    connection.rollback();
+                }else{
+                    console.log('select: '+results[0].Score);
+                }
+            });
+            connection.end();
+        }
+    }
+    );
+
+    connection.end();
+
+    res.status(msg_res.status_code).json(msg_res);
+})
+
+app.post('/inserir',function(req,res){
+    console.log("entrando no get/login");
+    var msg_res ={};
+    msg_res.status_code = 200;
+    msg_res.msg_text = "";
+
+    var dados = {};
+    dados  = req.body;
 
     res.status(msg_res.status_code).json(msg_res);
 })
