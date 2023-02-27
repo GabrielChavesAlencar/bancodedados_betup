@@ -2,7 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const app = express();
 
-const port = 3000;
+const port = process.env.PORT || 80;
 const config = {
     host     : 'sql9.freemysqlhosting.net',
     user     : 'sql9601493',
