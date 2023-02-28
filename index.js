@@ -65,7 +65,7 @@ app.get('/login',function(req,res){
     connection.connect(function(erro){
         if(erro){
             console.log('Erro no my sql: '+erro);
-            msg_res.msg_text = "erro: "+erro;
+            msg_res.msg_text = "Erro no mysql: "+erro;
             connection.end();
             res.status(msg_res.status_code).json(msg_res);
         }
@@ -74,7 +74,7 @@ app.get('/login',function(req,res){
             connection.query('SELECT * FROM leaderboard ORDER BY Score DESC',function(err,results,field){
                 if (err) {
                     console.log('Erro sql: '+erro);
-                    msg_res.msg_text = "erro: "+erro;
+                    msg_res.msg_text = "erro no select: "+erro;
                     connection.rollback();
                     connection.end();
                     res.status(msg_res.status_code).json(msg_res);
@@ -85,9 +85,9 @@ app.get('/login',function(req,res){
                         
                     }
 
-                   // msg_res.msg_text = "deu certo: "+results[0]+" tamanho: "+results.length;
-                    connection.end();
+                    
                     res.status(msg_res.status_code).send(msg_res.msg_text);
+                    connection.end();
                 }
             });
             
