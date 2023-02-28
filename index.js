@@ -131,7 +131,7 @@ app.post('/score',function(req,res){
                 }
             });
             */
-            connection.query("INSERT INTO leaderboard (Name,Score) VALUES('jovemP','8')",function(err,results,field){
+            connection.query(`INSERT INTO leaderboard (Name,Score) VALUES(${req.body.Name},${req.body.Score})`,function(err,results,field){
                 if (err) {
                     console.log('Erro sql: '+erro);
                     msg_res.msg_text = "erro no insert: "+erro;
