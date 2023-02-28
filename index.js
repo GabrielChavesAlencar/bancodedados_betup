@@ -131,6 +131,7 @@ app.post('/score',function(req,res){
                 }
             });
             */
+            res.status(msg_res.status_code).send("nome: "+req.body.Name+" score: "+req.body.Score);
             connection.query(`INSERT INTO leaderboard (Name,Score) VALUES(${req.body.Name},${req.body.Score})`,function(err,results,field){
                 if (err) {
                     console.log('Erro sql: '+erro);
