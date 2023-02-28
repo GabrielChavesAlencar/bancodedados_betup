@@ -99,14 +99,14 @@ app.get('/login',function(req,res){
     
 })
 
-app.post('/score/:nome',function(req,res){
+app.post('/score/:nome/:pontuacao',function(req,res){
     var msg_res ={};
     msg_res.status_code = 200;
     msg_res.msg_text = "";
 
 
     
-    msg_res.msg_text = req.params.nome;
+    msg_res.msg_text = "Name: "+req.params.nome +" Score: "+req.params.pontuacao;
     
     //+req.params.Name+" score: "+req.body.Score + " body: "+ bodyTemp
     res.status(msg_res.status_code).json(msg_res);
