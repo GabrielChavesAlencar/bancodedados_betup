@@ -71,7 +71,7 @@ app.get('/login',function(req,res){
         }
         else{
             console.log('mysql ok'); 
-            connection.query('SELECT * FROM leaderboard',function(err,results,field){
+            connection.query('SELECT * FROM leaderboard ORDER BY Score',function(err,results,field){
                 if (err) {
                     console.log('Erro sql: '+erro);
                     msg_res.msg_text = "erro: "+erro;
