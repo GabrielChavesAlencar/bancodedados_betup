@@ -139,10 +139,10 @@ app.post('/score/:nome/:pontuacao',function(req,res){
             });
             */
             
-            connection.query(`INSERT INTO leaderboard (Name,Score) VALUES(${nome},${pontuacao})`,function(err,results,field){
+            connection.query(`INSERT INTO leaderboard (Name,Score) VALUES(${req.params.nome},${req.params.pontuacao})`,function(err,results,field){
                 if (err) {
                     console.log('Erro sql: '+erro);
-                    msg_res.msg_text = "erro no insert: "+erro;
+                    msg_res.msg_text = "erro no insert: "+erro +" nome: "+ req.params.nome;
                     connection.rollback();
                     connection.end();
                     res.status(msg_res.status_code).json(msg_res);
