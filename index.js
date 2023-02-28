@@ -104,8 +104,8 @@ app.post('/score',function(req,res){
     msg_res.status_code = 200;
     msg_res.msg_text = "";
 
-    var bodyTemp = req.body;
-    msg_res.msg_text = "nome: "+res.body;
+    
+    msg_res.msg_text = "nome: "+req.body;
     //+req.params.Name+" score: "+req.body.Score + " body: "+ bodyTemp
     res.status(msg_res.status_code).json(msg_res);
     /*
