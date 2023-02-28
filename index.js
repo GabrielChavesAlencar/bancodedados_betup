@@ -74,6 +74,7 @@ app.get('/login',function(req,res){
                     connection.rollback();
                 }else{
                     console.log('select: '+results[0].Score);
+                    msg_res.msg_text = results;
                 }
             });
             connection.end();
