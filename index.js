@@ -106,8 +106,8 @@ app.post('/score',function(req,res){
     msg_res.msg_text2 = "";
 
     
-    msg_res.msg_text = "req: "+req.Name;
-    msg_res.msg_text2 = "res: "+res.Name;
+    msg_res.msg_text = "req: "+req.params + " body: "+req.body;
+    msg_res.msg_text2 = "res: "+res.params+ " body: "+res.body;
     //+req.params.Name+" score: "+req.body.Score + " body: "+ bodyTemp
     res.status(msg_res.status_code).json(msg_res);
     /*
