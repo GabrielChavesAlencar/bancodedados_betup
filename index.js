@@ -102,9 +102,11 @@ app.get('/login',function(req,res){
 app.post('/score',function(req,res){
     var msg_res ={};
     msg_res.status_code = 200;
-    msg_res.msg_text = "nome: "+req.params.Name+" score: "+req.body.Score + " body: "+ bodyTemp;
+    msg_res.msg_text = "";
 
     var bodyTemp = req.body;
+    msg_res.msg_text = "nome: ";
+    //+req.params.Name+" score: "+req.body.Score + " body: "+ bodyTemp
     res.status(msg_res.status_code).json(msg_res);
     /*
     connection.connect(function(erro){
