@@ -99,14 +99,14 @@ app.get('/login',function(req,res){
     
 })
 
-app.post('/score',function(req,res){
+app.post('/score/:nome',function(req,res){
     var msg_res ={};
     msg_res.status_code = 200;
     msg_res.msg_text = "";
 
 
     
-    msg_res.msg_text = "req name: "+req.params.Name + " Score: "+req.params.Score;
+    msg_res.msg_text = req.params.nome;
     
     //+req.params.Name+" score: "+req.body.Score + " body: "+ bodyTemp
     res.status(msg_res.status_code).json(msg_res);
