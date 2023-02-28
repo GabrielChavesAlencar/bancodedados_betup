@@ -92,8 +92,7 @@ app.get('/login',function(req,res){
             });
             
         }
-    }
-    );
+    });
 
     
 
@@ -101,12 +100,38 @@ app.get('/login',function(req,res){
 })
 
 app.post('/score',function(req,res){
-    console.log("entrando no get/login");
     var msg_res ={};
     msg_res.status_code = 200;
     msg_res.msg_text = "";
 
-    score.push(req.body);
+    var bodyTemp = req.body;
+    connection.connect(function(erro){
+        if(erro){
+            console.log('Erro no my sql: '+erro);
+            msg_res.msg_text = "Erro no mysql: "+erro;
+            connection.end();
+            res.status(msg_res.status_code).json(msg_res);
+        }
+        else{
+            console.log('mysql ok'); 
+            connection.query('INSERT INTO leaderboard (Name,Score) VALUES('+bodyTemp.Name+','+bodyTemp.Score+')',function(err,results,field){
+                if (err) {
+                    console.log('Erro sql: '+erro);
+                    msg_res.msg_text = "erro no insert: "+erro;
+                    connection.rollback();
+                    connection.end();
+                    res.status(msg_res.status_code).json(msg_res);
+                }else{
+                    msg_res.msg_text = "inserido com sucesso";
+                    
+                    res.status(msg_res.status_code).send(msg_res.msg_text);
+                    connection.end();
+                }
+            });
+            
+        }
+    });
+   
     
 
 
