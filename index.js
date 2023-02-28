@@ -66,6 +66,7 @@ app.get('/login',function(req,res){
         if(erro){
             console.log('Erro no my sql: '+erro);
             msg_res.msg_text = "erro: "+erro;
+            connection.end();
         }
         else{
             console.log('mysql ok'); 
@@ -84,7 +85,7 @@ app.get('/login',function(req,res){
     }
     );
 
-    connection.end();
+    
 
     res.status(msg_res.status_code).json(msg_res);
 })
