@@ -114,6 +114,7 @@ app.post('/score',function(req,res){
         }
         else{
             console.log('mysql ok'); 
+            /*
             connection.query('INSERT INTO leaderboard (Name,Score) VALUES('+bodyTemp.Name+','+bodyTemp.Score+')',function(err,results,field){
                 if (err) {
                     console.log('Erro sql: '+erro);
@@ -126,7 +127,22 @@ app.post('/score',function(req,res){
                     
                     res.status(msg_res.status_code).send(msg_res.msg_text);
                     connection.end();
+                   // res.status(msg_res.status_code).json(msg_res);
+                }
+            });
+            */
+            connection.query("INSERT INTO leaderboard (Name,Score) VALUES('jovemP','8')",function(err,results,field){
+                if (err) {
+                    console.log('Erro sql: '+erro);
+                    msg_res.msg_text = "erro no insert: "+erro;
+                    connection.rollback();
+                    connection.end();
                     res.status(msg_res.status_code).json(msg_res);
+                }else{
+                    msg_res.msg_text = "inserido com sucesso";
+                    
+                    res.status(msg_res.status_code).send(msg_res.msg_text);
+                    connection.end();
                 }
             });
             
