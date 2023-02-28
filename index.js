@@ -126,6 +126,7 @@ app.post('/score',function(req,res){
                     
                     res.status(msg_res.status_code).send(msg_res.msg_text);
                     connection.end();
+                    res.status(msg_res.status_code).json(msg_res);
                 }
             });
             
@@ -135,5 +136,5 @@ app.post('/score',function(req,res){
     
 
 
-    res.status(msg_res.status_code).json(msg_res);
+    
 })
