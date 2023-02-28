@@ -11,7 +11,7 @@ const config = {
     port: 3306,
     ssl: false
 }
-console.log("hello word3");
+console.log("hello word1");
 var connection = mysql.createConnection(config);
 /*
 connection.connect(function(erro){
@@ -76,13 +76,16 @@ app.get('/login',function(req,res){
                     console.log('Erro sql: '+erro);
                     msg_res.msg_text = "erro: "+erro;
                     connection.rollback();
+                    connection.end();
+                    res.status(msg_res.status_code).json(msg_res);
                 }else{
                     console.log('select: '+results[0].Score);
-                    msg_res.msg_text = results;
+                    msg_res.msg_text = "deu certo: "+results;
+                    connection.end();
+                    res.status(msg_res.status_code).json(msg_res);
                 }
             });
-            connection.end();
-            res.status(msg_res.status_code).json(msg_res);
+            
         }
     }
     );
