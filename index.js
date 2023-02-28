@@ -81,7 +81,7 @@ app.get('/login',function(req,res){
                 }else{
                     console.log('select: '+results[0].Score);
                     for (let index = 0; index < results.length; index++) {
-                        msg_res.msg_text += "Name: " + results[index].Name + " Score: " + results[index].Score+" ";
+                        msg_res.msg_text += "*/Name: " + results[index].Name + " *#Score: " + results[index].Score+" ";
                         
                     }
 
