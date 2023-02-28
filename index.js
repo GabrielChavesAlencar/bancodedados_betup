@@ -11,7 +11,7 @@ const config = {
     port: 3306,
     ssl: false
 }
-console.log("hello word1");
+console.log("hello word2");
 var connection = mysql.createConnection(config);
 /*
 connection.connect(function(erro){
@@ -82,7 +82,7 @@ app.get('/login',function(req,res){
                     console.log('select: '+results[0].Score);
                     msg_res.msg_text = "deu certo: "+results;
                     connection.end();
-                    res.status(msg_res.status_code).json(msg_res);
+                    res.status(msg_res.status_code).send(msg_res);
                 }
             });
             
@@ -95,14 +95,15 @@ app.get('/login',function(req,res){
     
 })
 
-app.post('/inserir',function(req,res){
+app.post('/score',function(req,res){
     console.log("entrando no get/login");
     var msg_res ={};
     msg_res.status_code = 200;
     msg_res.msg_text = "";
 
-    var dados = {};
-    dados  = req.body;
+    score.push(req.body);
+    
+
 
     res.status(msg_res.status_code).json(msg_res);
 })
