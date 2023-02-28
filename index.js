@@ -105,6 +105,8 @@ app.post('/score',function(req,res){
     msg_res.msg_text = "";
 
     var bodyTemp = req.body;
+    res.status(msg_res.status_code).send("nome: "+req.params.Name+" score: "+req.body.Score + " body: "+ bodyTemp);
+    /*
     connection.connect(function(erro){
         if(erro){
             console.log('Erro no my sql: '+erro);
@@ -130,8 +132,8 @@ app.post('/score',function(req,res){
                    // res.status(msg_res.status_code).json(msg_res);
                 }
             });
-            */
-            res.status(msg_res.status_code).send("nome: "+req.body.Name+" score: "+req.body.Score);
+            
+            
             connection.query(`INSERT INTO leaderboard (Name,Score) VALUES(${req.body.Name},${req.body.Score})`,function(err,results,field){
                 if (err) {
                     console.log('Erro sql: '+erro);
@@ -148,7 +150,7 @@ app.post('/score',function(req,res){
             });
             
         }
-    });
+    });*/
    
     
 
