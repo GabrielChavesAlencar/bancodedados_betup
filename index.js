@@ -87,7 +87,7 @@ app.get('/login',function(req,res){
 
                    // msg_res.msg_text = "deu certo: "+results[0]+" tamanho: "+results.length;
                     connection.end();
-                    res.status(msg_res.status_code).send(msg_res);
+                    res.status(msg_res.status_code).send(msg_res.msg_text);
                 }
             });
             
