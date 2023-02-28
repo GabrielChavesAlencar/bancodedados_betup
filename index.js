@@ -103,11 +103,11 @@ app.post('/score',function(req,res){
     var msg_res ={};
     msg_res.status_code = 200;
     msg_res.msg_text = "";
-    msg_res.msg_text2 = "";
+
 
     
-    msg_res.msg_text = "req: "+req.params + " body: "+req.body;
-    msg_res.msg_text2 = "res: "+res.params+ " body: "+res.body;
+    msg_res.msg_text = "req name: "+req.params.Name + " Score: "+req.params.Score;
+    
     //+req.params.Name+" score: "+req.body.Score + " body: "+ bodyTemp
     res.status(msg_res.status_code).json(msg_res);
     /*
