@@ -71,6 +71,7 @@ app.get('/login',function(req,res){
             connection.query('SELECT * FROM leaderboard',function(err,results,field){
                 if (err) {
                     console.log('Erro sql: '+erro);
+                    msg_res.msg_text = "erro: "+erro;
                     connection.rollback();
                 }else{
                     console.log('select: '+results[0].Score);
