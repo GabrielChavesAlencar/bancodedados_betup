@@ -110,7 +110,7 @@ app.post('/score/:nome/:pontuacao',function(req,res){
     //msg_res.msg_text = "Name: "+req.params.nome +" Score: "+req.params.pontuacao;
     
     //+req.params.Name+" score: "+req.body.Score + " body: "+ bodyTemp
-    res.status(msg_res.status_code).json(msg_res);
+    //res.status(msg_res.status_code).json(msg_res);
     
     connection.connect(function(erro){
         if(erro){
