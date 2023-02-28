@@ -105,7 +105,7 @@ app.post('/score',function(req,res){
     msg_res.msg_text = "";
 
     var bodyTemp = req.body;
-    res.status(msg_res.status_code).send("nome: "+req.params.Name+" score: "+req.body.Score + " body: "+ bodyTemp);
+    res.status(msg_res.status_code).json("nome: "+req.params.Name+" score: "+req.body.Score + " body: "+ bodyTemp);
     /*
     connection.connect(function(erro){
         if(erro){
