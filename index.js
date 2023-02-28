@@ -11,7 +11,7 @@ const config = {
     port: 3306,
     ssl: false
 }
-console.log("hello word");
+console.log("hello word2");
 var connection = mysql.createConnection(config);
 /*
 connection.connect(function(erro){
@@ -65,6 +65,7 @@ app.get('/login',function(req,res){
     connection.connect(function(erro){
         if(erro){
             console.log('Erro no my sql: '+erro);
+            msg_res.msg_text = "erro: "+erro;
         }
         else{
             console.log('mysql ok'); 
