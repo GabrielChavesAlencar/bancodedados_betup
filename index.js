@@ -5,7 +5,7 @@ const app = express();
 
 const cors = require('cors');
 // Seus domínios permitidos devem estar aqui
-const allowedOrigins = ['https://gabrielchavesalencar.github.io']; 
+const allowedOrigins = ['https://i.simmer.io']; 
 const corsOption = {
     origin: allowedOrigins,
 };
@@ -29,7 +29,7 @@ const config = {
     port: 3306,
     ssl: false
 }
-console.log("hello word0");
+console.log("hello word1");
 
 var connection = mysql.createConnection(config);
 /*
