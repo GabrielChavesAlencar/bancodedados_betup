@@ -131,7 +131,7 @@ app.post('/score/:nome/:pontuacao',function(req,res){
                    
                 }else{
                     num_resultado = results.length;
-                    msg_res.tamanho = num_resultado;
+                    msg_res.tamanho = results.length;
                 }
             });
             if(num_resultado==0){
