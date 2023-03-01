@@ -103,7 +103,7 @@ app.post('/score/:nome/:pontuacao',function(req,res){
     var msg_res ={};
     msg_res.status_code = 200;
     msg_res.msg_text = "";
-    msg_res.qeri = "INSERT INTO leaderboard (Name,Score) VALUES("+req.params.nome+","+req.params.pontuacao+")";
+    msg_res.qeri = "INSERT INTO leaderboard (Name,Score) VALUES('"+req.params.nome+"',"+req.params.pontuacao+")";
     var nome = req.params.nome;
     var pontuacao = req.params.pontuacao;
 
