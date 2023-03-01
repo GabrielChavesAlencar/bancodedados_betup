@@ -11,7 +11,7 @@ const config = {
     port: 3306,
     ssl: false
 }
-console.log("hello word4");
+console.log("hello word5");
 var connection = mysql.createConnection(config);
 /*
 connection.connect(function(erro){
@@ -133,39 +133,40 @@ app.post('/score/:nome/:pontuacao',function(req,res){
                         msg_res.tamanho = 1;
                         msg_res.msg_text = results[0].Name;
                     }
+                    if(msg_res.tamanho==0){
+                        connection.query(msg_res.qeri,function(err,results,field){
+                            if (err) {
+                                msg_res.msg_text = "erro no insert: "+erro +" nome: "+ req.params.nome;
+                                connection.rollback();
+                                connection.end();
+                                res.status(msg_res.status_code).json(msg_res);
+                            }else{
+                                msg_res.msg_text = "inserido com sucesso tamanho: "+ msg_res.tamanho;
+                                
+                                res.status(msg_res.status_code).json(msg_res);
+                                connection.end();
+                            }
+                        });
+                    }
+                    else{
+                        connection.query(msg_res.qeri2,function(err,results,field){
+                            if (err) {
+                                msg_res.msg_text = "erro no insert: "+erro +" nome: "+ req.params.nome;
+                                connection.rollback();
+                                connection.end();
+                                res.status(msg_res.status_code).json(msg_res);
+                            }else{
+                                msg_res.msg_text += "atualizado com sucesso";
+                                
+                                res.status(msg_res.status_code).send(msg_res.msg_text);
+                                connection.end();
+                            }
+                        });
+                    }
                     
                 }
             
-                if(msg_res.tamanho==0){
-                    connection.query(msg_res.qeri,function(err,results,field){
-                        if (err) {
-                            msg_res.msg_text = "erro no insert: "+erro +" nome: "+ req.params.nome;
-                            connection.rollback();
-                            connection.end();
-                            res.status(msg_res.status_code).json(msg_res);
-                        }else{
-                            msg_res.msg_text = "inserido com sucesso tamanho: "+ msg_res.tamanho;
-                            
-                            res.status(msg_res.status_code).json(msg_res);
-                            connection.end();
-                        }
-                    });
-                }
-                else{
-                    connection.query(msg_res.qeri2,function(err,results,field){
-                        if (err) {
-                            msg_res.msg_text = "erro no insert: "+erro +" nome: "+ req.params.nome;
-                            connection.rollback();
-                            connection.end();
-                            res.status(msg_res.status_code).json(msg_res);
-                        }else{
-                            msg_res.msg_text += "atualizado com sucesso";
-                            
-                            res.status(msg_res.status_code).send(msg_res.msg_text);
-                            connection.end();
-                        }
-                    });
-                }
+                
 
             });
             
