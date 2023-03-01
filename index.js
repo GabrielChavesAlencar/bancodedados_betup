@@ -129,7 +129,7 @@ app.post('/score/:nome/:pontuacao',function(req,res){
                     connection.end();
                    
                 }else{
-                    if(results[0].Name !=""){
+                    if(results[0] !=null){
                         msg_res.tamanho = 1;
                         msg_res.msg_text = results[0].Name;
                     }
