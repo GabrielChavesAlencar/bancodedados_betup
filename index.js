@@ -11,7 +11,7 @@ const config = {
     port: 3306,
     ssl: false
 }
-console.log("hello word0");
+console.log("hello word1");
 var connection = mysql.createConnection(config);
 /*
 connection.connect(function(erro){
@@ -107,7 +107,6 @@ app.post('/score/:nome/:pontuacao',function(req,res){
     msg_res.qeri2 = "UPDATE leaderboard SET Score ="+req.params.pontuacao+" WHERE Name = '"+req.params.nome+"'";
     msg_res.qeri3 = "SELECT * FROM leaderboard WHERE Name = '"+req.params.nome+"'";
     msg_res.tamanho = 0;
-    var num_resultado = 0;
    
 
 
@@ -131,13 +130,12 @@ app.post('/score/:nome/:pontuacao',function(req,res){
                    
                 }else{
                     if(results.Name !=""){
-                        num_resultado = 1;
                         msg_res.tamanho = 1;
                     }
                     
                 }
             });
-            if(num_resultado==0){
+            if(msg_res.tamanho==0){
                 connection.query(msg_res.qeri,function(err,results,field){
                     if (err) {
                         msg_res.msg_text = "erro no insert: "+erro +" nome: "+ req.params.nome;
