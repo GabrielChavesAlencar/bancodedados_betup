@@ -29,7 +29,7 @@ const config = {
     port: 3306,
     ssl: false
 }
-console.log("hello word6");
+console.log("hello word7");
 var connection = mysql.createConnection(config);
 /*
 connection.connect(function(erro){
