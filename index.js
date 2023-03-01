@@ -10,7 +10,7 @@ const corsOption = {
     origin: allowedOrigins,
 };
 
-app.use(cors(corsOptions));
+app.use(cors(corsOption));
 
 
 
@@ -29,7 +29,8 @@ const config = {
     port: 3306,
     ssl: false
 }
-console.log("hello word7");
+console.log("hello word8");
+
 var connection = mysql.createConnection(config);
 /*
 connection.connect(function(erro){
