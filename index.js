@@ -11,7 +11,7 @@ const config = {
     port: 3306,
     ssl: false
 }
-console.log("hello word2");
+console.log("hello word4");
 var connection = mysql.createConnection(config);
 /*
 connection.connect(function(erro){
@@ -129,8 +129,9 @@ app.post('/score/:nome/:pontuacao',function(req,res){
                     connection.end();
                    
                 }else{
-                    if(results.Name !=""){
+                    if(results[0].Name !=""){
                         msg_res.tamanho = 1;
+                        msg_res.msg_text = results[0].Name;
                     }
                     
                 }
@@ -158,7 +159,7 @@ app.post('/score/:nome/:pontuacao',function(req,res){
                             connection.end();
                             res.status(msg_res.status_code).json(msg_res);
                         }else{
-                            msg_res.msg_text = "atualizado com sucesso";
+                            msg_res.msg_text += "atualizado com sucesso";
                             
                             res.status(msg_res.status_code).send(msg_res.msg_text);
                             connection.end();
