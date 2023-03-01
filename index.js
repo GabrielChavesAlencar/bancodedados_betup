@@ -104,6 +104,8 @@ app.post('/score/:nome/:pontuacao',function(req,res){
     msg_res.status_code = 200;
     msg_res.msg_text = "";
     msg_res.qeri = "INSERT INTO leaderboard (Name,Score) VALUES('"+req.params.nome+"',"+req.params.pontuacao+")";
+    msg_res.qeri2 = "UPDATE leaderboard SET Score ="+req.params.pontuacao+"WHERE Name = '"+req.params.nome+"'";
+    msg_res.qeri3 = "SELECT * FROM leaderboard WHERE Name = '"+req.params.nome+"' ";
     var num_resultado = 0;
    
 
@@ -118,7 +120,7 @@ app.post('/score/:nome/:pontuacao',function(req,res){
             res.status(msg_res.status_code).json(msg_res);
         }
         else{
-            connection.query("SELECT * FROM leaderboard WHERE Name = 'jonas' ",function(err,results,field){
+            connection.query(msg_res.qeri3,function(err,results,field){
                 if (err) {
                     console.log('Erro sql: '+erro);
                     msg_res.msg_text = "erro no select: "+erro;
@@ -128,26 +130,38 @@ app.post('/score/:nome/:pontuacao',function(req,res){
                    
                 }else{
                     num_resultado = results.length;
-                    msg_res.msg_text = "resultados: "+results.length+" tambem resultados: "+num_resultado;
-                    res.status(msg_res.status_code).json(msg_res);
-                    connection.end();
                 }
             });
-            
-            /*
-            connection.query(msg_res.qeri,function(err,results,field){
-                if (err) {
-                    msg_res.msg_text = "erro no insert: "+erro +" nome: "+ req.params.nome;
-                    connection.rollback();
-                    connection.end();
-                    res.status(msg_res.status_code).json(msg_res);
-                }else{
-                    msg_res.msg_text = "inserido com sucesso";
-                    
-                    res.status(msg_res.status_code).send(msg_res.msg_text);
-                    connection.end();
-                }
-            });*/
+            if(num_resultado==0){
+                connection.query(msg_res.qeri,function(err,results,field){
+                    if (err) {
+                        msg_res.msg_text = "erro no insert: "+erro +" nome: "+ req.params.nome;
+                        connection.rollback();
+                        connection.end();
+                        res.status(msg_res.status_code).json(msg_res);
+                    }else{
+                        msg_res.msg_text = "inserido com sucesso";
+                        
+                        res.status(msg_res.status_code).send(msg_res.msg_text);
+                        connection.end();
+                    }
+                });
+            }
+            else{
+                connection.query(msg_res.qeri2,function(err,results,field){
+                    if (err) {
+                        msg_res.msg_text = "erro no insert: "+erro +" nome: "+ req.params.nome;
+                        connection.rollback();
+                        connection.end();
+                        res.status(msg_res.status_code).json(msg_res);
+                    }else{
+                        msg_res.msg_text = "atualizado com sucesso";
+                        
+                        res.status(msg_res.status_code).send(msg_res.msg_text);
+                        connection.end();
+                    }
+                });
+            }
             
         }
     });
