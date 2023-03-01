@@ -130,8 +130,8 @@ app.post('/score/:nome/:pontuacao',function(req,res){
                     connection.end();
                    
                 }else{
-                    num_resultado = results.length;
-                    msg_res.tamanho = results.length;
+                    num_resultado = results.affectedRows;
+                    msg_res.tamanho = results.affectedRows;
                 }
             });
             if(num_resultado==0){
@@ -142,7 +142,7 @@ app.post('/score/:nome/:pontuacao',function(req,res){
                         connection.end();
                         res.status(msg_res.status_code).json(msg_res);
                     }else{
-                        msg_res.msg_text = "inserido com sucesso";
+                        msg_res.msg_text = "inserido com sucesso tamanho: "+ msg_res.tamanho;
                         
                         res.status(msg_res.status_code).send(msg_res.msg_text);
                         connection.end();
