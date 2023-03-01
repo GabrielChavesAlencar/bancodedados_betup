@@ -104,46 +104,39 @@ app.post('/score/:nome/:pontuacao',function(req,res){
     msg_res.status_code = 200;
     msg_res.msg_text = "";
     msg_res.qeri = "INSERT INTO leaderboard (Name,Score) VALUES('"+req.params.nome+"',"+req.params.pontuacao+")";
-    var nome = req.params.nome;
-    var pontuacao = req.params.pontuacao;
+    var num_resultado = 0;
+   
 
 
-    
-    //msg_res.msg_text = "Name: "+req.params.nome +" Score: "+req.params.pontuacao;
-    
-    //+req.params.Name+" score: "+req.body.Score + " body: "+ bodyTemp
-    //res.status(msg_res.status_code).json(msg_res);
+
     
     connection.connect(function(erro){
         if(erro){
-            console.log('Erro no my sql: '+erro);
+            
             msg_res.msg_text = "Erro no mysql: "+erro;
             connection.end();
             res.status(msg_res.status_code).json(msg_res);
         }
         else{
-            console.log('mysql ok'); 
-            /*
-            connection.query('INSERT INTO leaderboard (Name,Score) VALUES('+bodyTemp.Name+','+bodyTemp.Score+')',function(err,results,field){
+            connection.query("SELECT * FROM leaderboard WHERE Name = 'jonas' ",function(err,results,field){
                 if (err) {
                     console.log('Erro sql: '+erro);
-                    msg_res.msg_text = "erro no insert: "+erro;
+                    msg_res.msg_text = "erro no select: "+erro;
                     connection.rollback();
-                    connection.end();
                     res.status(msg_res.status_code).json(msg_res);
-                }else{
-                    msg_res.msg_text = "inserido com sucesso";
-                    
-                    res.status(msg_res.status_code).send(msg_res.msg_text);
                     connection.end();
-                   // res.status(msg_res.status_code).json(msg_res);
+                   
+                }else{
+                    num_resultado = results.length;
+                    msg_res.msg_text = "resultados: "+results.length+" tambem resultados: "+num_resultado;
+                    res.status(msg_res.status_code).json(msg_res);
+                    connection.end();
                 }
             });
-            */
             
+            /*
             connection.query(msg_res.qeri,function(err,results,field){
                 if (err) {
-                    console.log('Erro sql: '+erro);
                     msg_res.msg_text = "erro no insert: "+erro +" nome: "+ req.params.nome;
                     connection.rollback();
                     connection.end();
@@ -154,7 +147,7 @@ app.post('/score/:nome/:pontuacao',function(req,res){
                     res.status(msg_res.status_code).send(msg_res.msg_text);
                     connection.end();
                 }
-            });
+            });*/
             
         }
     });
