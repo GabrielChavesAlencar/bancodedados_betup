@@ -104,8 +104,9 @@ app.post('/score/:nome/:pontuacao',function(req,res){
     msg_res.status_code = 200;
     msg_res.msg_text = "";
     msg_res.qeri = "INSERT INTO leaderboard (Name,Score) VALUES('"+req.params.nome+"',"+req.params.pontuacao+")";
-    msg_res.qeri2 = "UPDATE leaderboard SET Score ="+req.params.pontuacao+"WHERE Name = '"+req.params.nome+"'";
-    msg_res.qeri3 = "SELECT * FROM leaderboard WHERE Name = '"+req.params.nome+"' ";
+    msg_res.qeri2 = "UPDATE leaderboard SET Score ="+req.params.pontuacao+" WHERE Name = '"+req.params.nome+"'";
+    msg_res.qeri3 = "SELECT * FROM leaderboard WHERE Name = '"+req.params.nome+"'";
+    msg_res.tamanho = 0;
     var num_resultado = 0;
    
 
@@ -130,6 +131,7 @@ app.post('/score/:nome/:pontuacao',function(req,res){
                    
                 }else{
                     num_resultado = results.length;
+                    msg_res.tamanho = num_resultado;
                 }
             });
             if(num_resultado==0){
