@@ -29,7 +29,7 @@ const config = {
     port: 3306,
     ssl: false
 }
-console.log("hello word8");
+console.log("hello word9");
 
 var connection = mysql.createConnection(config);
 /*
@@ -75,7 +75,7 @@ connection.connect(function(erro){
 app.listen(port,function(){
     console.log('Servidor escutando na porta: ' + port)
 })
-app.get('/login',function(req,res){
+app.get('/login',cors(corsOption),function(req,res){
     console.log("entrando no get/login");
     var msg_res ={};
     msg_res.status_code = 200;
@@ -118,7 +118,7 @@ app.get('/login',function(req,res){
     
 })
 
-app.post('/score/:nome/:pontuacao',function(req,res){
+app.post('/score/:nome/:pontuacao',cors(corsOption),function(req,res){
     var msg_res ={};
     msg_res.status_code = 200;
     msg_res.msg_text = "";
