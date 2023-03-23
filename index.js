@@ -22,10 +22,10 @@ app.use(cors(corsOption));
 
 const port = process.env.PORT || 80;
 const config = {
-    host     : 'sql9.freemysqlhosting.net',
-    user     : 'sql9601493',
-    password : 'HyWy1H38B3',
-    database : 'sql9601493',
+    host     : 'db4free.net',
+    user     : 'gabrielchaves',
+    password : 'gabriel147159',
+    database : 'leaderboard',
     port: 3306,
     ssl: false
 }
